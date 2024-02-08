@@ -1,0 +1,99 @@
+{% include 'header.html' %}
+<!-- Navbar-End -->
+
+<section class="home" id="home">
+    <div class="content">
+    <h3>Fast Food Delivery</h3>
+    <p>We Ensure you to provide,
+        Worlds Fastest Food Delivery,
+        Without comprimising in Taste! </p>
+    <a href="/menu/" class="btn btn-dark btn-lg">order now</a>
+    </div>
+</section>
+<hr>
+    <fieldset>
+        <legend>
+            <h1>Deals Of The Day:</h1>
+        </legend>
+    <div class="items">
+        <div class="box">
+            <div class="item item1">
+                <img src="/static/pizza_peri_peri.png" width="100%"  alt="" name="name">
+                <h2 name="order">Pizza Peri Peri</h2>
+                <p name="qty">Quantity</p>
+                <p name="price">Price:Rs 199</p>
+                <a href="#" class="btn btn-dark"id="add_cart">Add To Cart</a>
+            </div>
+        </div>
+       <div class="box">
+        <div class="item item2">
+            <img src="/static/pizza.png" width="100%" alt="">
+            <h2>Pizza Farmhouse</h2>
+            <p>Price:Rs 249</p>
+            <a href="#" class="btn btn-dark"id="add_cart">Add To Cart</a>
+        </div>
+       </div>
+        
+        <div class="box">
+            <div class="item item3">
+                <img src="/static/chicken_burger.png" width="100%"  alt="">
+                <h2>Chicken Burger</h2>
+                <p>Price:Rs 219</p>
+                <a href="#" class="btn btn-dark" id="add_cart">Add To Cart</a>
+            </div>
+        </div>
+        
+        <div class="box">
+            <div class="item item4">
+                <img src="/static/burger.png" width="100%" alt="">
+                <h2>Veg Burger</h2>
+                <p>Price:Rs 129</p>
+                <a href="#" class="btn btn-dark" id="add_cart">Add To Cart</a>
+            </div>
+        </div>   
+        
+    </fieldset>
+    </div>
+
+    <hr>
+    <section class="contact">
+        <h2>Help_us</h2>
+        <form action="/help/id/" method="post" class="sub bg-dark"> 
+            {% csrf_token %}
+                <div class="mb-3">
+                  <label for="name" class="form-label">Enter Your Name</label>
+                  <input type="name" class="form-control" id="name" aria-describedby="emailHelp" width="80%" name="name">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Enter Your Email</label>
+                    <input type="email" class="form-control" id="name" aria-describedby="emailHelp" name="email">
+                  </div>
+                  <div class="mb-3">
+                    <label for="concern" class="form-label">Enter Your concern</label>
+                    <input type="nameconcern" class="form-control" id="name" aria-describedby="emailHelp" name="concern">
+                  </div>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>
+   
+
+    <hr>
+  
+   
+
+    <div class="container">
+        <h2>Customer Reviews:</h2>
+        <div class="reviews">
+        <div class="box">
+            <i class="fas fa-star"></i>
+            <p>Aryan Saxena</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem exercitationem quisquam deleniti aliquam, magnam voluptates recusandae. Temporibus quia id aliquam accusamus exercitationem maxime doloremque, ipsam reprehenderit debitis doloribus illum et maiores numquam obcaecati illo voluptatum consequuntur quae. Ducimus, quas?</p>
+        </div>
+    </div>
+    </div>
+    {% include 'footer.html' %}
+
+    
+</body>
+</html>

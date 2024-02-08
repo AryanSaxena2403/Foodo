@@ -1,0 +1,84 @@
+body{
+    background-color :  rgb(25, 25, 131);
+}
+*{
+    /* color: hsl(0, 0%, 5%); */
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0%;
+    padding: 0%;
+}
+
+.navbar{
+    background-color: #fff;
+    display: flex;
+    font-size: 30px;
+    padding: 10px;
+    border-radius: 30rem;
+    margin: 20px;
+}
+.home{
+    min-height: 100vh;
+    background-image: url(/static/pizza-with-turkey-bacon-orange-and-cashew-nuts-2022-03-29-07-33-54-utc.jpg);
+    background-size: cover;
+    background-position: center;
+    margin-top: -134px;
+    display: flex;
+    align-items: center;
+}
+
+.home .content{
+    max-width: 60rem;
+}
+
+.home .content h3{
+    font-size: 6rem;
+    color: #fff;
+}
+
+.home .content p{
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.8;
+    padding: 1rem 0;
+    color: #fff;
+}
+hr{
+    background-color: black;
+    padding: 10px;
+    margin: 20em;
+    width: 100%;
+    height: 15px;
+}
+.items{
+   width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2px;
+    margin-top: 10px;
+}
+.box{
+    padding-top: 5px;
+    border: 1px solid wheat;
+    width: 23%;
+    text-align: center;
+    border-radius: 2rem;
+    margin: 5px;
+    
+}
+.sub{
+    color: #fff;
+    margin: 2em;
+}
+.contact h2{
+    
+    text-align: center;
+}
+.container h2{
+    text-align: center;
+}
+footer{
+    position: sticky;
+    bottom: -1;
+}
+

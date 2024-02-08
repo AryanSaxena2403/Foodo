@@ -1,0 +1,136 @@
+{% include 'header.html' %}
+
+<h1>Menu Section</h1>
+<fieldset>
+    <legend><h2>Pizza</h2></legend>
+    <div class="items" >
+    
+        {% for i in orderp %}
+        <!-- {% csrf_token %} -->
+        <div class="box">
+            <div class="item">
+            <img src="{{i.product_img.url}}" alt="pizza" id="img{{i.id}}" width="100%">
+            <h2 id="prod{{i.id}}">{{i.product_name}}</h2>
+            <h2 id="price{{i.id}}">{{i.price}}</h2>
+            <div class="add" >
+            <button class="btn btn-dark" id="add_cart{{i.id}}" data-target="qty{{i.id}}" onclick="cart(this.id)"><i class="fa-solid fa-circle-plus "></i></button>
+            <input type="text" name="qty" id="qty{{i.id}}" class="qty2" value="0" width="15%">
+            <a href="#" id="remove_cart{{i.id}}" data-target="qty{{i.id}}" onclick="remove(this.id)">  <i class="fa-solid fa-circle-minus"></i></a>  
+        </div>
+        <button class="btn btn-dark my-4" id="{{i.id}}" onclick="addcart(this.id)">Add to cart</button>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</fieldset>
+<hr>
+<fieldset>
+    <legend><h2>Burger</h2></legend>
+    <div class="items">
+        {% for i in orderb %}
+        <div class="box">
+            <div class="item">  
+            <img src="{{i.product_img.url}}" id="b{{i.id}}" alt="pizza" width="100%" >
+            <h2 id="bnm{{i.id}}">{{i.product_name}}</h2>
+            <p id="bp{{i.id}}">{{i.price}}</p>
+            <div class="add" >
+            <a href="#" class="btn btn-dark" id="add_cartb{{i.id}}" data-target="bqty{{i.id}}" onclick="cart(this.id)" ><i class="fa-solid fa-circle-plus"></i></a>
+            <input type="text" name="qty"  id="bqty{{i.id}}" value="0" width="10%">
+            <a href="#" class="add_to_cart" id="remove_cartb{{i.id}}" data-target="bqty{{i.id}}"  onclick="remove(this.id)"> <i class="fa-solid fa-circle-minus"></i></a>
+        </div>
+        <button class="btn btn-dark my-4" id="{{i.id}}" onclick="addburger(this.id)">Add to cart</button>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</fieldset>
+<br><br>
+<script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+<script>
+    
+console.log('Loaded');
+
+function cart(cartid){
+    let btn=document.getElementById(cartid);
+    const id = btn.getAttribute("data-target");
+    let qty = document.getElementById(id).value;
+    qty=parseInt(qty)+1;
+    document.getElementById(id).value=qty
+}
+
+function remove(remid){
+    let btn=document.getElementById(remid);
+    rem=btn.getAttribute("data-target");
+    val=document.getElementById(rem).value;
+    if(val>0){
+    val=parseInt(val)-1;
+    }
+    document.getElementById(rem).value=val;
+}
+//Api Post Call for adding PIZZA
+function addcart(addid){
+    var pimg=document.getElementById(`img${addid}`).src;
+    var name=document.getElementById(`prod${addid}`).innerHTML;
+    var price=document.getElementById(`price${addid}`).innerHTML;
+    var qty=document.getElementById(`qty${addid}`).value;
+    if(qty=='0'){
+        alert("Add Atleast 1 Quantity");
+        return;
+    }
+    console.log(`${name} is of ${price} and quantity is ${qty} with ${pimg}`); 
+    fetch('http://127.0.0.1:8000/movetocart/companies/',{
+        method: 'POST',
+        body:JSON.stringify({
+            // product_img:pimg,
+            product_name:name,
+            qty:qty,
+            price:price
+        }),
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' ,
+            "Content-Type":"application/json"
+        }
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log(data);
+        alert("Item Added To Cart");
+    })
+    }
+
+    function addburger(addid){
+    var pimg=document.getElementById(`img${addid}`).src;
+    var name=document.getElementById(`bnm${addid}`).innerHTML;
+    var price=document.getElementById(`bp${addid}`).innerHTML;
+    var qty=document.getElementById(`bqty${addid}`).value;
+    console.log(`${name} is of ${price} and quantity is ${qty} with ${pimg}`); 
+    fetch('http://127.0.0.1:8000/movetocart/companies/',{
+        method: 'POST',
+        body:JSON.stringify({
+            // product_img:pimg,
+            product_name:name,
+            qty:qty,
+            price:price
+        }),
+        headers:{
+            "X-CSRFToken": '{{csrf_token}}' ,
+            "Content-Type":"application/json"
+        }
+    })
+    .then(function(response){
+        return response.json()
+    })
+    .then(function(data){
+        console.log(data)
+    })
+    }
+
+
+
+</script>
+
+
+{% include 'footer.html' %}

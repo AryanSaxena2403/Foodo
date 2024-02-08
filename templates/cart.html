@@ -1,0 +1,113 @@
+{% include 'header.html' %}
+
+
+    <h2>Cart</h2>
+    <table class="table" id="myTable">
+        <thead>
+          <tr>
+            <th scope="col md-6">S.no</th>
+            <th>Product</th>
+            <th scope="col">Orders</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Price</th>
+            <th>Action Plan</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr id="row">
+                <!-- <th scope="row" id="sno">1</th>
+                <td style="width: 5rem;"><img src="/static/pizza.png" alt="" id="imag" width="10%"></td>
+                <td id="name">pizza</td>
+                <td id="qty">2</td>
+                <td id="price">199</td>
+                <td>
+                    <a href="" class="btn btn- danger">Delete</a>
+                </td> -->
+              </tr> 
+        </tbody>
+      </table>
+      <br>
+      <a href="#" class="btn btn-dark my-3"  id="add_cart" >Proceed to Checkout</a>
+      <br>
+       <script>
+        // var btn= document.createElement('button');
+        // btn.setAttribute('class',"btn btn-dark")
+        // btn.innerText="Delete"
+        console.log("Cart Loaded");
+        function getProducts(){
+        var http=new XMLHttpRequest();
+        http.onreadystatechange=function(){
+          if (this.readyState === 4){
+            if(this.status === 200){
+              console.log("call");
+            var response=JSON.parse(this.responseText);
+            //Create new td for every order
+            for(var i=0;i<response.length;i++){
+              // var table = document.getElementById("myTable");
+              // var row = table.insertRow(-1);
+              // var cell1 = row.insertCell(0);
+              // var cell2 = row.insertCell(1);
+              // var cell3 = row.insertCell(2);
+              // var cell4 = row.insertCell(3);
+              // var cell5 = row.insertCell(4);
+              // var cell6 = row.insertCell(5);
+              // cell1.innerHTML = response[i].id; 
+              // cell2.innerHTML = response[i].product_img;
+              // cell3.innerHTML = response[i].product_name;
+              // cell4.innerHTML = response[i].qty;
+              // cell5.innerHTML = response[i].price;
+              // cell6.innerHTML = "Delete";
+              // document.getElementById('imag').appendChild=
+              // document.getElementById('name').appendChild=response[i].product_name;
+              // document.getElementById('price').appendChild=response[i].price;
+              // var row=document.getElementById(row);
+              var table=document.getElementById('myTable');
+              // var row=document.getElementById('row');
+              // row.add([
+              // document.getElementById('sno').innerHTML=i,
+              // document.getElementById('imag').innerHTML=response[i].product_img;
+              // document.getElementById('name').innerHTML=response[i].product_name;
+              // document.getElementById('qty').innerHTML=response[i].qty;
+              // document.getElementById('price').innerHTML=response[i].price;
+              
+              let template=`
+              <tr>
+                <td>${i+1}</td>
+                <td>${response[i].product_img}</td>
+                <td>${response[i].product_name}</td>
+                <td>${response[i].qty}</td>
+                <td>${response[i].price}</td>
+                <td> <a href="" class="btn btn- danger" id="btndlt">Delete</a> </td>
+                </tr>`;
+                table.innerHTML+=template;
+            }
+            }
+            else{
+              console.log("Failed");
+            }
+          }
+
+        }
+        http.open('GET','http://127.0.0.1:8000/movetocart/companies/',true);
+        http.send();
+        }
+        getProducts();
+        var cnf=document.getElementById('add_cart'); 
+        cnf.addEventListener('click',()=>{
+        
+          if(confirm("Proceed to checkout")){
+            alert("Order Placed Successfully");
+            window.location.replace('/orders');
+            sessionStorage.setItem('submit',true);
+           
+          }
+        }); 
+        var dlt=document.getElementById('btndlt');
+        dlt.addEventListener('click',()=>{
+          console.log("Deleted");
+        });
+        var table=document.getElementById('myTable');
+            table.innerHTML="";
+       </script>
+
+{% include 'footer.html' %}
